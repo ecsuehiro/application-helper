@@ -1,0 +1,40 @@
+{
+  "name": "eric-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ecsuehiro/eric-app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ecsuehiro/eric-app/issues"
+  },
+  "homepage": "https://github.com/ecsuehiro/eric-app#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.2",
+    "dotenv": "^5.0.1",
+    "express": "^4.16.2",
+    "jquery": "^3.3.1",
+    "mongodb": "^3.0.4",
+    "react": "^16.2.0",
+    "react-bootstrap": "^0.32.1",
+    "react-dom": "^16.2.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "babelify": "^8.0.0",
+    "bower": "^1.8.2",
+    "browserify": "^16.1.1",
+    "gulp": "^3.9.1",
+    "vinyl-source-stream": "^2.0.0"
+  }
+}
