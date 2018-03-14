@@ -86,7 +86,7 @@ class Detail extends React.PureComponent {
     }
 
     updateApplication() {
-        return axios.put(`/api/application/${id}`, this.state.formData)
+        return axios.put(`/api/application/${this.props.id}`, this.state.formData)
             .then(data => {
                 this.props.close()
             })
