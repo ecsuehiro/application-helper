@@ -1,8 +1,10 @@
 "use strict"
 
-const React = require('react')
+import React from 'react'
+import axios from 'axios'
+
 const Detail = require('./application.detail')
-const axios = require('axios')
+
 
 class List extends React.PureComponent {
     constructor(props, context) {
@@ -26,6 +28,7 @@ class List extends React.PureComponent {
         this.onCreate = this.onCreate.bind(this)
         this.deleteEntry = this.deleteEntry.bind(this)
         this.loadEntry = this.loadEntry.bind(this)
+        this.checkStatus = this.checkStatus.bind(this)
     }
 
     componentWillReceiveProps(props) {
@@ -74,7 +77,7 @@ class List extends React.PureComponent {
     loadEntry(event) {
         let target = event.target
         let id = target.id
-        
+
         return axios.get(`/api/application/${id}`)
             .then(response => {
                 this.setState(prevState => {
@@ -95,26 +98,40 @@ class List extends React.PureComponent {
             })
     }
 
+    checkStatus(item) {
+        if (item.status === "Success") {
+            return 'interview'
+        }
+        else if (item.status === 'Pending') {
+            return 'pending'
+        }
+        else if (item.status === 'Rejected') {
+            return 'rejected'
+        }
+    }
+
     render() {
         let listData
         let n = 0
         if (this.state.list) {
             listData =
-                this.state.list.map(item => (
-                    <tr key={item._id}>
-                        <td>{n += 1}</td>
-                        <td>{item.companyName}</td>
-                        <td>{item.jobTitle}</td>
-                        <td>{item.siteUsed}</td>
-                        <td>{item.employerInfo}</td>
-                        <td>{item.dateApplied}</td>
-                        <td>{item.status}</td>
-                        <td>
-                            <input type="button" className="btn btn-success" id={item._id} value="Edit" onClick={this.loadEntry} />
-                            <input type="button" className="btn btn-danger" id={item._id} value="Delete" onClick={this.deleteEntry} />
-                        </td>
-                    </tr>
-                ))
+                this.state.list.map(item => { 
+                    return (
+                        <tr key={item._id} className={this.checkStatus(item)}>
+                            <td>{n += 1}</td>
+                            <td>{item.companyName}</td>
+                            <td>{item.jobTitle}</td>
+                            <td>{item.siteUsed}</td>
+                            <td>{item.employerInfo}</td>
+                            <td>{item.dateApplied}</td>
+                            <td>{item.status}</td>
+                            <td>
+                                <input type="button" className="btn btn-success" id={item._id} value="Edit" onClick={this.loadEntry} />
+                                <input type="button" className="btn btn-danger" id={item._id} value="Delete" onClick={this.deleteEntry} />
+                            </td>
+                        </tr>
+                    )
+                })
         }
 
         return (
