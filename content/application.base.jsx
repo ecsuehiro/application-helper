@@ -11,6 +11,9 @@ class Base extends React.PureComponent {
         this.getApplication = this.getApplication.bind(this)
         this.updateList = this.updateList.bind(this)
         this.removeItem = this.removeItem.bind(this)
+        this.sortAlphabet = this.sortAlphabet.bind(this)
+        this.sortStatus = this.sortStatus.bind(this)
+        this.sortDate = this.sortDate.bind(this)
 
         this.state = {
             list: ""
@@ -55,11 +58,56 @@ class Base extends React.PureComponent {
         })
     }
 
+    sortAlphabet() {
+        this.setState(prevState => {
+            let sortList = prevState.list.slice()
+            sortList.sort((a, b) => {
+                if (a.companyName < b.companyName) { return -1 }
+                if (a.companyName > b.companyName) { return 1 }
+                return 0
+            })
+            return {
+                list: sortList
+            }
+        })
+    }
+
+    sortStatus() {
+        this.setState(prevState => {
+            let sortList = prevState.list.slice()
+            sortList.sort((a, b) => {
+                if (a.status < b.status) { return -1 }
+                if (a.status > b.status) { return 1 }
+                return 0
+            })
+            return {
+                list: sortList
+            }
+        })
+    }
+
+    sortDate() {
+        this.setState(prevState => {
+            let sortList = prevState.list.slice()
+            sortList.sort((a, b) => {
+                if (a.dateApplied < b.dateApplied) { return -1 }
+                if (a.dateApplied > b.dateApplied) { return 1 }
+                return 0
+            })
+            return {
+                list: sortList
+            }
+        })
+    }
+
     render() {
         return (
             <div>
                 <div>
                     <h1 className="title text-center">Application List</h1>
+                    <button type="button" className="base-button btn btn-default" onClick={this.sortDate}>Sort by Date</button>
+                    <button type="button" className="base-button btn btn-default" onClick={this.sortAlphabet}>Sort Alphabetically</button>
+                    <button type="button" className="base-button btn btn-default" onClick={this.sortStatus}>Sort By Status</button>
                 </div>
                 <hr />
                 <div>
